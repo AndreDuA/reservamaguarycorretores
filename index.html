@@ -187,6 +187,42 @@ ol.steps b{display:block;margin-bottom:2px}
 footer{margin-top:36px;padding:20px 0 40px;border-top:1px solid var(--line);color:var(--muted);font-size:.85rem}
 footer p{max-width:70ch}
 footer p + p{margin-top:8px}
+/* Tira-dúvidas: botão flutuante e painel de chat. No celular o painel sobe como folha inferior. */
+.chat-fab{position:fixed;right:16px;bottom:16px;z-index:20;display:flex;align-items:center;gap:8px;font:inherit;font-weight:700;font-size:.95rem;cursor:pointer;border:0;border-radius:999px;padding:13px 18px;background:var(--brand);color:var(--brand-ink);box-shadow:0 6px 18px rgba(59,35,20,.28)}
+.chat-fab:hover{background:var(--ink)}
+.chat-fab[hidden]{display:none}
+.chat-fab svg{width:20px;height:20px;flex:0 0 auto}
+.chat{position:fixed;z-index:30;right:16px;bottom:16px;width:min(400px,calc(100vw - 32px));height:min(620px,calc(100vh - 32px));height:min(620px,calc(100dvh - 32px));display:flex;flex-direction:column;background:var(--bg);border:1px solid var(--brand);border-radius:16px;box-shadow:0 12px 36px rgba(59,35,20,.32);overflow:hidden}
+.chat[hidden]{display:none}
+@media (max-width:520px){.chat{right:0;left:0;bottom:0;width:100%;height:min(680px,86vh);height:min(680px,86dvh);border-radius:16px 16px 0 0;border-left:0;border-right:0;border-bottom:0}}
+.chat-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;background:var(--brand);color:var(--brand-ink);padding:12px 8px 12px 16px}
+.chat-head b{display:block;font-family:var(--font-display);font-size:1.05rem;line-height:1.2}
+.chat-head span{display:block;font-size:.8rem;opacity:.88;margin-top:3px}
+.chat-x{flex:0 0 auto;width:40px;height:40px;font:inherit;font-size:1.5rem;line-height:1;cursor:pointer;border:0;border-radius:8px;background:transparent;color:var(--brand-ink)}
+.chat-x:hover{background:rgba(249,246,240,.16)}
+.chat-log{flex:1 1 auto;overflow-y:auto;overscroll-behavior:contain;padding:14px;display:flex;flex-direction:column;gap:10px}
+.cm{max-width:92%;border-radius:14px;padding:10px 12px;font-size:.95rem}
+.cm.user{align-self:flex-end;background:var(--brand);color:var(--brand-ink);border-bottom-right-radius:4px}
+.cm.bot{align-self:flex-start;background:var(--surface);border:1px solid var(--line);border-bottom-left-radius:4px}
+.cm h4{font-family:var(--font-body);font-size:.98rem;font-weight:700;line-height:1.3;margin:0 0 4px}
+.cm p + p{margin-top:6px}
+.cm .blk{border-top:1px dashed var(--line);padding-top:6px;margin-top:6px}
+.cm .blk .r{display:flex;justify-content:space-between;gap:10px;font-weight:700}
+.cm .blk .r span:last-child{font-variant-numeric:tabular-nums;white-space:nowrap}
+.cm .blk small{display:block;color:var(--muted);font-size:.84rem;margin-top:2px}
+.cm .blk small.com{color:var(--accent);font-weight:700}
+.cm .note{margin-top:8px;font-size:.84rem;color:var(--muted)}
+.cm .acts{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.cm .acts .btn{font-size:.82rem;padding:6px 10px}
+.cm .lbl{margin-top:10px;font-size:.76rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+.cq{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.cq button{font:inherit;font-size:.84rem;font-weight:600;text-align:left;cursor:pointer;padding:7px 11px;border-radius:16px;border:1px solid var(--line);background:var(--bg);color:var(--ink)}
+.cq button:hover{border-color:var(--brand);color:var(--brand)}
+.chat-form{display:flex;gap:8px;padding:10px;border-top:1px solid var(--line);background:var(--surface)}
+.chat-form input{font:inherit;font-size:16px;flex:1 1 auto;min-width:0;padding:10px 12px;border-radius:10px;border:1px solid var(--line);background:var(--bg);color:var(--ink)}
+.chat-form .btn{font-size:.92rem;padding:10px 14px}
+.askchat{margin-top:12px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;font-size:.92rem;color:var(--muted)}
+.score{bottom:76px}
 </style>
 </head>
 <body>
@@ -196,7 +232,7 @@ footer p + p{margin-top:8px}
     <img class="logo" src="data:image/png;base64,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" alt="Reserva Maguary" width="210" height="113">
     <p class="eyebrow">Material interno para corretores parceiros</p>
     <h1>Central do Corretor</h1>
-    <p class="meta">Atualizada em 12/11/2026. Valores da tabela vigente desde 02/10/2026.</p>
+    <p class="meta">Atualizada em 13/11/2026. Valores da tabela vigente desde 02/10/2026.</p>
   </div>
 </header>
 
@@ -490,6 +526,7 @@ footer p + p{margin-top:8px}
     <input type="search" id="q" placeholder="Buscar em dúvidas e objeções: escritura, correção, entrada..." aria-label="Buscar em dúvidas e objeções">
     <span class="count" id="qcount" role="status"></span>
   </div>
+  <p class="askchat">Não achou a resposta? <button type="button" class="btn" data-openchat>Perguntar no tira-dúvidas</button></p>
   <div class="stack" id="faq"></div>
 </section>
 
@@ -560,6 +597,25 @@ footer p + p{margin-top:8px}
 
 </main>
 
+
+<button type="button" class="chat-fab" id="chatfab" aria-haspopup="dialog" aria-controls="chatbox">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.6 2.2c-.7.4-1.1.9-1.1 1.6"/><path d="M12 16.5h.01"/></svg>
+  <span>Tirar dúvida</span>
+</button>
+<div class="chat" id="chatbox" role="dialog" aria-labelledby="chattitle" hidden>
+  <div class="chat-head">
+    <div>
+      <b id="chattitle">Tira-dúvidas do corretor</b>
+      <span>Respostas automáticas com o conteúdo oficial desta central</span>
+    </div>
+    <button type="button" class="chat-x" id="chatclose" aria-label="Fechar o tira-dúvidas">×</button>
+  </div>
+  <div class="chat-log" id="chatlog" role="log" aria-live="polite"></div>
+  <form class="chat-form" id="chatform" autocomplete="off">
+    <input type="text" id="chatin" placeholder="Ex.: quanto fica o lote 83?" aria-label="Escreva a sua dúvida" maxlength="200" enterkeyhint="send">
+    <button type="submit" class="btn solid">Enviar</button>
+  </form>
+</div>
 
 <script>
 (function(){
@@ -791,6 +847,277 @@ footer p + p{margin-top:8px}
   }
   document.getElementById("resetquiz").addEventListener("click", renderQuiz);
   renderQuiz();
+
+  /* ---------- tira-dúvidas (chat) ----------
+     Não usa IA nem servidor: responde só com o conteúdo desta página (dúvidas, objeções, ficha, planos)
+     e com o mesmo cálculo do simulador. Quando não encontra a resposta, diz isso e manda confirmar
+     com a coordenação comercial, em vez de improvisar. */
+  var SEC = {resumo:"Resumo", localizacao:"Localização", visao:"Visão do arquiteto", planos:"Planos e simulador", materiais:"Materiais",
+    videos:"Vídeos e redes", duvidas:"Dúvidas", objecoes:"Objeções", roteiro:"Roteiro", mensagens:"Mensagens", comissao:"Comissão"};
+
+  // perguntas que não estão na lista de dúvidas, com respostas tiradas das outras seções: [origem, pergunta, resposta, seção, palavras-chave]
+  var EXTRA = [
+    ["Ficha","Quem é a incorporadora e qual o CNPJ?","DUÁ Empreendimentos e Construções Ltda., CNPJ 37.310.226/0001-07. Ela incorpora e constrói o Reserva Maguary.","resumo","empresa construtora dona responsavel razao social dua"],
+    ["Ficha","Quais são as ruas do condomínio?","São 5 ruas internas: Maguary, Harpia, Uirapuru, Ararajuba e Anambé. Têm de 5,5 m a 6 m de largura, calçadas de 1 m nos dois lados e piso em bloco intertravado.","resumo","rua largura calcada pavimentacao asfalto piso"],
+    ["Ficha","O condomínio tem portaria?","Sim. É um condomínio fechado, com portaria 24h.","resumo","seguranca guarita fechado vigilancia porteiro"],
+    ["Ficha","Qual a profundidade?","A piscina adulto tem 1,20 m e a infantil tem 0,60 m.","resumo","piscina piscinas funda fundura crianca"],
+    ["Ficha","A metragem do lote pode variar?","Pode. O contrato admite variação de até 5% na área final do lote. Não prometa metragem exata ao cliente.","roteiro","area exata diferenca medida tamanho variacao"],
+    ["Ficha","Qual o site e o Instagram do empreendimento?","O site é reservamaguary.com.br e o perfil no Instagram é @reservamaguary. Marque sempre o perfil nas suas publicações.","videos","site instagram perfil rede social arroba link"],
+    ["Localização","O que fica perto do Reserva Maguary?","O bairro é asfaltado e fica perto do Hospital Santa Maria, de escolas e farmácias e dos supermercados Mix Mateus e Líder. Tem acesso rápido à Avenida Independência e fica próximo da Nova Orla de Ananindeua e do Parque Vila Maguary.","localizacao","perto proximo vizinhanca bairro hospital escola supermercado mercado farmacia orla parque independencia acesso regiao"],
+    ["Preço","Quanto custa o lote?","No lote padrão de 160 m²: R$ 163.813,79 em 168 meses, R$ 147.432,41 em 120 meses, R$ 139.241,72 em 36 meses e R$ 100.499,76 no plano Investidor. Para um lote específico, escreva o número dele aqui, por exemplo: lote 83.","planos","preco valor custa total tabela"],
+    ["Preço","Qual o preço por m²?","R$ 1.023,84 por m² no plano de 168 meses e R$ 628,12 por m² no plano Investidor. Como referência de mercado, anúncios de lotes de 160 m² em outros condomínios fechados de Ananindeua pedem R$ 1.687 e R$ 1.910 por m² (consulta em 12/11/2026).","resumo","metro quadrado m2 barato concorrente concorrencia comparar mercado"],
+    ["Preço","Qual a menor parcela?","R$ 599 por mês, fixa, no plano de 168 meses com reforços: 28 semestrais de R$ 1.963,97 ou 14 anuais de R$ 3.927,94, no lote de 160 m². Sem reforços, a mensal do plano de 168 meses é de R$ 926,33. Nunca apresente os R$ 599 sem explicar os reforços e a correção.","planos","menor mensal parcela minima barata 599 mensalidade prestacao"],
+    ["Preço","Tem desconto para pagamento à vista?","Não existe desconto fora da tabela vigente. A condição de menor valor é o plano Investidor: R$ 100.499,76 no lote de 160 m², com 50% de sinal, que pode ser dividido em 5 vezes, e o restante em 12 mensais sem correção.","planos","desconto vista avista negociar abatimento promocao"],
+    ["Preço","A tabela de preços vai mudar?","Vai. Em janeiro de 2027 o lote de referência passa a R$ 165.998 e a 1ª mensal passa a vencer 30 dias após a assinatura. Para contratos assinados antes disso, confirme o vencimento da 1ª mensal com a coordenação comercial.","planos","tabela nova aumento reajuste janeiro 2027 primeira vence vencimento"],
+    ["Vendas","Quantos lotes já foram vendidos?","Mais de 40 lotes vendidos. Os lotes nascentes e os mais próximos do clube são os que acabam primeiro.","resumo","vendido vendas ritmo restam sobram nascente melhores"],
+    ["Vendas","Como confirmo se um lote está disponível?","Confirme com a Helaine, na coordenação comercial, antes de oferecer o lote ao cliente. Esta central e o simulador não mostram disponibilidade.","roteiro","disponivel disponibilidade livre reservado reservar vendido mapa espelho"],
+    ["Vendas","Com quem eu falo na coordenação comercial?","Com a Helaine, na coordenação comercial. É com ela que você confirma a disponibilidade do lote, agenda a visita ao terreno e combina a gravação com a videomaker.","roteiro","helaine coordenacao contato falar secretaria suporte ajuda"],
+    ["Vendas","Posso dizer que o lote vai valorizar?","Não. Não prometa valorização nem percentual de retorno. Use fatos: mais de 40 lotes vendidos, bairro com investimento público na Orla e no Parque, e preço por m² entre os menores de condomínio fechado em Ananindeua.","roteiro","valorizar valorizacao retorno rentabilidade lucro investimento garantia"],
+    ["Vendas","O que eu não posso prometer ao cliente?","Valorização garantida, data de entrega diferente da do contrato, construção antes da entrega do condomínio, parcela de R$ 599 sem explicar reforços e correção, desconto ou condição fora da tabela, móveis iguais aos das imagens, valor de condomínio ou IPTU, metragem exata e um lote específico antes de confirmar a disponibilidade.","roteiro","prometer promessa proibido garantir cuidado"],
+    ["Vendas","Qual o roteiro de atendimento?","São 6 passos: qualifique o cliente (morar ou investir, entrada e mensal que cabem), apresente pelo perfil, simule na frente dele, confirme o lote e agende a visita, preencha a ficha de proposta e leve ao contrato. O passo a passo está na seção Roteiro.","roteiro","roteiro atendimento passo etapas abordagem atender"],
+    ["Comissão","Qual a minha comissão?","Pessoa jurídica (PJ): 5% nos planos de 168 e 120 meses e 8% nos planos de 36 meses e Investidor. Pessoa física (PF): 3% e 5%, respectivamente. A comissão sai do sinal pago pelo cliente e, pelo contrato, não é devolvida se ele desistir depois do prazo legal de arrependimento. Para ver o valor em um lote, escreva: comissão do lote 83.","comissao","comissao corretagem ganho recebo percentual porcentagem pagamento corretor"],
+    ["Materiais","Onde baixo o book e o material de vendas?","Na seção Materiais: book comercial, memorial descritivo e ficha de proposta. Os arquivos ficam no Google Drive e abrem sem login.","materiais","book material pdf memorial ficha proposta baixar download arquivo tabela"],
+    ["Materiais","Tem vídeo para enviar ao cliente?","Tem. Na seção Vídeos e redes estão o vídeo institucional, o vídeo da obra e o perfil @reservamaguary, com mais vídeos para repostar.","videos","video reels institucional obra repostar enviar"],
+    ["Materiais","Como gravo vídeos com a videomaker?","Os corretores parceiros podem gravar com a nossa videomaker, no próprio empreendimento. Você aparece, ela cuida da gravação e da edição. Combine a data com a coordenação comercial.","videos","videomaker gravar gravacao filmar conteudo redes sociais postar"],
+    ["Visão do arquiteto","Quanto custa construir a casa?","Pela estimativa do André, arquiteto do projeto: cerca de R$ 150 mil para uma casa de 80 a 100 m² com 3 quartos. Com o lote no plano Investidor (R$ 100.499,76), a casa própria fica em cerca de R$ 250 mil; com o lote parcelado, de R$ 297 mil a R$ 314 mil. É estimativa: o custo varia com o projeto e o acabamento.","visao","custo construir construcao casa obra orcamento gasto"],
+    ["Visão do arquiteto","O que é o Bosque Maguary?","É a área verde do condomínio, que preserva a vegetação nativa do terreno. Tem academia ao ar livre, o Lounge Maguary (salão de festas ao ar livre) e a casa na árvore, um playground infantil na natureza.","visao","bosque verde natureza arvore lounge academia salao festa diferencial"]
+  ];
+  // palavras-chave extras para dúvidas da lista principal
+  var FAQKW = {
+    "Qual o tamanho dos lotes?":"metragem area medida 160 m2 padrao especial dimensao",
+    "Tem análise de crédito ou consulta ao Serasa?":"negativado nome sujo spc restricao score aprovacao cadastro aprovar",
+    "E se o cliente desistir da compra?":"distrato cancelar rescisao devolucao dinheiro volta arrependimento",
+    "Quando posso construir?":"comecar iniciar obra casa construcao",
+    "Qual o prazo de entrega?":"pronto data conclusao termina fica entregue",
+    "O que vem no lote?":"agua energia luz esgoto medidor ligacao",
+    "Qual o valor do condomínio e do IPTU?":"taxa condominial imposto mensal condominio",
+    "Posso usar o lote para comércio?":"loja negocio ponto empresa escritorio",
+    "Precisa de financiamento em banco?":"banco caixa financiar boleto forma pagamento",
+    "O cliente pode vender ou transferir o lote antes de quitar?":"repassar revender cessao passar",
+    "Quais são as regras para construir no lote?":"recuo afastamento andar sobrado altura tamanho casa cabe",
+    "O que tem na área de lazer?":"clube lazer areas comuns churrasqueira quadra piscina piscinas"
+  };
+
+  var KB = [];
+  FAQ.forEach(function(f){ KB.push({src:"Dúvidas · "+f[0], q:f[1], a:f[2], sec:"duvidas", kw:FAQKW[f[1]]||""}); });
+  OBJ.forEach(function(o){ KB.push({src:"Objeção do cliente", q:"“"+o[0]+"”", a:o[1], base:o[2], sec:"objecoes", kw:""}); });
+  EXTRA.forEach(function(x){ KB.push({src:x[0], q:x[1], a:x[2], sec:x[3], kw:x[4]}); });
+
+  var STOP = {};
+  ("o a os as um uma uns umas de da do das dos e em no na nos nas para pra por com sem que qual quais como quando se ao aos ser tem ter ha " +
+   "meu minha seu sua eu ele ela cliente posso pode podem preciso precisa sobre isso esse essa este esta mais muito ja vai vou sao foi tambem " +
+   "ou me te lhe nao sim la aqui ali so apenas ainda cada todo toda todos todas reserva maguary usar fazer faz quero queria saber gostaria " +
+   "existe tenho falar dizer digo responder respondo explicar funciona acontece algum alguma dele dela esta estao comercial quanto quantos quanta quantas tempo").split(" ").forEach(function(w){ STOP[w] = 1; });
+
+  function stem(w){
+    if(/^\d+$/.test(w)) return w;
+    if(w.length > 4){
+      if(/oes$/.test(w)) w = w.slice(0,-3) + "ao";
+      else if(/ais$/.test(w)) w = w.slice(0,-3) + "al";
+      else if(/eis$/.test(w)) w = w.slice(0,-3) + "el";
+      else if(/ns$/.test(w)) w = w.slice(0,-2) + "m";
+      else if(/s$/.test(w)) w = w.slice(0,-1);
+    }
+    return w.length > 6 ? w.slice(0,6) : w;
+  }
+  function toks(s){
+    var out = [], seen = {};
+    norm(s).replace(/m²|\bm2\b|metros? quadrados?/g," m2 ").replace(/[^a-z0-9]+/g," ").split(" ").forEach(function(w){
+      if(!w || STOP[w]) return;
+      if(w !== "m2" && (/^\d+$/.test(w) ? w.length < 2 : w.length < 3)) return;
+      var t = stem(w);
+      if(!seen[t]){ seen[t] = 1; out.push(t); }
+    });
+    return out;
+  }
+
+  // grupos de sinônimos: quem pergunta por uma palavra também encontra as outras do grupo
+  var SYN = {};
+  ["entrada sinal", "parcela mensal mensalidade prestacao", "reforco semestral anual balao intermediaria",
+   "correcao reajuste corrigir corrigida juros incc ipca aumenta aumentar", "serasa spc negativado sujo restricao score credito",
+   "prazo entrega pronto entregue conclusao termina", "escritura cartorio documentacao", "desistir desistencia distrato cancelar rescisao devolucao devolver",
+   "transferir vender repassar cessao revender", "construir construcao edificar levantar", "recuo afastamento", "pavimento andar sobrado altura",
+   "lazer clube", "comissao corretagem", "tamanho metragem medida dimensao", "preco valor custa custo", "localizacao endereco fica onde mapa",
+   "atraso atrasar multa inadimplencia", "antecipar adiantar quitar quitacao amortizar", "banco financiamento financiar", "comercio loja negocio",
+   "visita visitar conhecer", "video reels", "book material pdf", "agua energia luz esgoto medidor", "seguranca portaria guarita",
+   "valorizar valorizacao retorno rentabilidade", "disponivel disponibilidade livre reservado"
+  ].forEach(function(g){
+    var ts = toks(g);
+    ts.forEach(function(t){ SYN[t] = (SYN[t]||[]).concat(ts.filter(function(x){ return x !== t; })); });
+  });
+
+  var DF = {};
+  KB.forEach(function(d){
+    d.set = {};
+    toks(d.a + " " + (d.base||"")).forEach(function(t){ d.set[t] = 1; });
+    toks(d.kw).forEach(function(t){ d.set[t] = 1.8; });
+    toks(d.q).forEach(function(t){ d.set[t] = 2.2; });
+    Object.keys(d.set).forEach(function(t){ DF[t] = (DF[t]||0) + 1; });
+  });
+  var IDF_MAX = Math.log(1 + KB.length);
+  function idf(t){ return DF[t] ? Math.log(1 + KB.length/DF[t]) : 0; }
+
+  function search(query){
+    var groups = toks(query).map(function(t){
+      var alts = [t].concat(SYN[t]||[]), w = 0;
+      alts.forEach(function(a){ w = Math.max(w, idf(a)); });
+      return {alts:alts, w: w || IDF_MAX};
+    });
+    var total = 0, hits = [];
+    groups.forEach(function(g){ total += g.w; });
+    if(!total) return hits;
+    KB.forEach(function(d){
+      var score = 0, cov = 0;
+      groups.forEach(function(g){
+        var best = 0;
+        g.alts.forEach(function(a, i){ if(d.set[a]){ var v = idf(a) * d.set[a] * (i === 0 ? 1 : 0.8); if(v > best) best = v; } });
+        if(best > 0){ score += best; cov += g.w; }
+      });
+      if(score > 0) hits.push({d:d, cover:cov/total, score:score * (0.5 + 0.5*cov/total)});
+    });
+    hits.sort(function(a, b){ return b.score - a.score; });
+    return hits;
+  }
+
+  // pergunta com número de lote ou com um plano: responde com o cálculo do simulador
+  function parseSim(nq){
+    var m = nq.match(/\blotes?\s*(?:n[o.º°]*\s*|numero\s*)?0*(\d{1,3})\b(?!\s*(?:m\b|m2|metro))/), n = null, rest = nq;
+    if(m){ n = parseInt(m[1], 10); rest = nq.replace(m[0], " "); }
+    var onlyM = /so (com |as )?mensa|sem (semestra|reforc|anua|balao|intermed)/.test(rest);
+    var withS = !onlyM && /semestra|anua|reforc/.test(rest);
+    var ids = [];
+    if(/\b168\b/.test(rest)) ids = ids.concat(onlyM ? ["168m"] : withS ? ["168s"] : ["168s","168m"]);
+    if(/\b120\b/.test(rest)) ids = ids.concat(onlyM ? ["120m"] : withS ? ["120s"] : ["120s","120m"]);
+    if(/\b36\b/.test(rest)) ids.push("36");
+    if(/investidor|a vista|avista/.test(rest)) ids.push("inv");
+    var planTalk = /plano|meses|vezes|parcel|simul/.test(rest) || /investidor/.test(rest);
+    if(n === null && !(ids.length && planTalk) && !/simul/.test(rest)) return null;
+    if(n === null && /desconto/.test(rest)) return null;
+    return {
+      n:n, ids:ids, com:/comiss|ganh|receb/.test(rest),
+      disp: n !== null && /dispon|vendid|livre|reservad|ocupad/.test(rest),
+      areaOnly: n !== null && !ids.length && /metragem|tamanho|area|medida|quantos m|m2|metros|quadra/.test(rest) && !/preco|valor|custa|quanto fica|quanto sai|parcel|mensal|plano|simul|entrada|sinal|comiss/.test(rest)
+    };
+  }
+  function simReply(s){
+    var n = s.n, a = 160, head, rot;
+    if(n === null){ head = "Lote padrão de 160 m² (8 × 20 m)"; rot = "lote padrão de 160 m²"; }
+    else if(n < 1 || n > 199){ return {paras:["O Reserva Maguary tem lotes de 1 a 199. Confira o número do lote."]}; }
+    else if(ESPECIAIS[n]){ a = ESPECIAIS[n][1]; head = "Lote " + n + ", quadra " + ESPECIAIS[n][0] + ": " + areaFmt(a) + " m² (metragem especial)"; rot = "lote " + n + ", quadra " + ESPECIAIS[n][0] + ", " + areaFmt(a) + " m²"; }
+    else { head = "Lote " + n + ": 160 m² (8 × 20 m, lote padrão)"; rot = "lote " + n + ", 160 m²"; }
+    if(s.disp) return {tag:"Disponibilidade", title:head, paras:["Esta central não mostra se o lote está disponível. Confirme o lote " + n + " com a Helaine, na coordenação comercial, antes de oferecer ao cliente."],
+      chipsLabel:"Simular este lote", chips:[{label:"Quanto fica o lote " + n + "?", text:"Quanto fica o lote " + n + "?"}]};
+    if(s.areaOnly) return {tag:"Simulador", title:head, note:"O contrato admite variação de até 5% na área final do lote. Disponibilidade: confirme com a coordenação comercial.",
+      chipsLabel:"Simular este lote", chips:[{label:"Quanto fica o lote " + n + "?", text:"Quanto fica o lote " + n + "?"}]};
+    var plans = calc(a), detail = s.ids.length > 0, blocks = [], txt = ["Reserva Maguary, " + rot];
+    if(detail) plans = plans.filter(function(p){ return s.ids.indexOf(p.id) > -1; });
+    plans.forEach(function(p){
+      var full = ["Sinal: " + brl(p.entrada) + " (em " + p.entradaTxt + ")", "Mensais: " + p.mensal];
+      if(p.extra) full.push("Reforços: " + p.extra);
+      full.push("Correção: " + p.corr);
+      txt.push("", "Plano " + p.nome, "Total: " + brl(p.total)); txt = txt.concat(full);
+      var sub = detail ? full.slice() : ["Sinal em " + p.entradaTxt + " · " + p.mensal + (p.extra ? " · " + p.extra : "")];
+      var blk = {h:p.nome, v:brl(p.total), sub:sub};
+      if(s.com) blk.com = "Sua comissão: PJ " + brl(r2(p.total*p.com[0])) + " (" + Math.round(p.com[0]*100) + "%) · PF " + brl(r2(p.total*p.com[1])) + " (" + Math.round(p.com[1]*100) + "%)";
+      blocks.push(blk);
+    });
+    txt.push("", "Simulação mediante a verificação da secretaria de vendas.");
+    var who = n === null ? "" : "Lote " + n + " ", chips = [];
+    if(!detail){
+      [["168 meses","plano de 168 meses"],["120 meses","plano de 120 meses"],["36 meses","plano de 36 meses"],["Investidor","plano Investidor"]].forEach(function(c){
+        chips.push({label:c[0], text:(who ? who + "no " : "Detalhar o ") + c[1]});
+      });
+    }
+    return {tag:"Simulador", title:head, blocks:blocks, note:"Mediante a verificação da secretaria de vendas. A simulação não confirma a disponibilidade do lote." + (s.com ? " A comissão não aparece no resumo copiado para o cliente." : ""),
+      copy:txt.join("\n"), copyLabel:"Copiar resumo para o cliente", sec:"planos", chipsLabel:"Ver um plano em detalhe", chips:chips};
+  }
+
+  function kbReply(d, related){
+    var r = {tag:d.src, title:d.q, paras:[d.a], copy:d.a, copyLabel:"Copiar resposta", sec:d.sec};
+    if(d.base) r.note = "Base: " + d.base;
+    if(related && related.length){ r.chipsLabel = "Relacionadas"; r.chips = related.map(function(h){ return {label:h.d.q, doc:h.d}; }); }
+    return r;
+  }
+  function greet(){
+    return {title:"Olá! Qual é a dúvida?", paras:["Pergunte sobre planos, valor de um lote pelo número, prazos, documentação, regras de construção e comissão. As respostas vêm do conteúdo oficial desta central."],
+      note:"Respostas automáticas, sem atendente. Valores e disponibilidade mediante a verificação da secretaria de vendas.",
+      chipsLabel:"Perguntas comuns", chips:["Tem análise de crédito?","Quanto fica o lote 83?","Quando o cliente pode construir?","Qual o prazo de entrega?","Qual a minha comissão?"].map(function(t){ return {label:t, text:t}; })};
+  }
+  function answer(raw){
+    var nq = norm(raw).replace(/\s+/g," ").trim();
+    if(/^(oi+|ola|opa|e ai|bom dia|boa tarde|boa noite|hello|hi)\b[\s!.,?]*$/.test(nq)) return greet();
+    if(/^(muito )?(obrigad[oa]|valeu|vlw|ok|blz|beleza|show|perfeito|entendi)\b[\s!.,?]*$/.test(nq)) return {paras:["Disponha. Se surgir outra dúvida, é só escrever."]};
+    var s = parseSim(nq);
+    if(s) return simReply(s);
+    var hits = search(raw), top = hits[0];
+    if(!top || top.cover < 0.5){
+      var r = {title:"Não encontrei essa resposta no material oficial.", paras:["Não improvise com o cliente: confirme com a Helaine, na coordenação comercial."],
+        copy:"Dúvida de corretor (Reserva Maguary): " + raw.trim(), copyLabel:"Copiar a pergunta"};
+      if(hits.length){ r.chipsLabel = "Talvez ajude"; r.chips = hits.slice(0,3).map(function(h){ return {label:h.d.q, doc:h.d}; }); }
+      return r;
+    }
+    return kbReply(top.d, hits.slice(1,5).filter(function(h){ return h.cover >= 0.5 && h.score >= top.score*0.6; }).slice(0,2));
+  }
+  window.__ask = answer; // exposto para conferência
+
+  var chatFab = document.getElementById("chatfab"), chatBox = document.getElementById("chatbox"), chatLog = document.getElementById("chatlog"),
+      chatForm = document.getElementById("chatform"), chatIn = document.getElementById("chatin"), chatStarted = false;
+
+  function addUser(text){ var m = el("div","cm user",text); chatLog.appendChild(m); return m; }
+  function addBot(r){
+    var m = el("div","cm bot");
+    if(r.tag) m.appendChild(el("span","tag",r.tag));
+    if(r.title) m.appendChild(el("h4",null,r.title));
+    (r.paras||[]).forEach(function(p){ m.appendChild(el("p",null,p)); });
+    (r.blocks||[]).forEach(function(b){
+      var blk = el("div","blk"), row = el("div","r");
+      row.appendChild(el("span",null,b.h)); row.appendChild(el("span",null,b.v)); blk.appendChild(row);
+      b.sub.forEach(function(t){ blk.appendChild(el("small",null,t)); });
+      if(b.com) blk.appendChild(el("small","com",b.com));
+      m.appendChild(blk);
+    });
+    if(r.note) m.appendChild(el("p","note",r.note));
+    if(r.copy || r.sec){
+      var acts = el("div","acts");
+      if(r.copy){ var cb = el("button","btn",r.copyLabel||"Copiar"); cb.type = "button"; cb.addEventListener("click", function(){ copyText(r.copy, cb); }); acts.appendChild(cb); }
+      if(r.sec && SEC[r.sec]){
+        var sb = el("button","btn","Ver em " + SEC[r.sec]); sb.type = "button";
+        sb.addEventListener("click", function(){ closeChat(); var t = document.getElementById(r.sec); if(t) t.scrollIntoView(); });
+        acts.appendChild(sb);
+      }
+      m.appendChild(acts);
+    }
+    if(r.chips && r.chips.length){
+      m.appendChild(el("p","lbl",r.chipsLabel||"Sugestões"));
+      var cq = el("div","cq");
+      r.chips.forEach(function(c){
+        var b = el("button",null,c.label); b.type = "button";
+        b.addEventListener("click", function(){ var u = addUser(c.label); addBot(c.doc ? kbReply(c.doc) : answer(c.text)); scrollTo(u); });
+        cq.appendChild(b);
+      });
+      m.appendChild(cq);
+    }
+    chatLog.appendChild(m);
+    return m;
+  }
+  function scrollTo(node){ chatLog.scrollTop = Math.max(0, node.offsetTop - chatLog.offsetTop - 8); }
+  function openChat(){
+    chatBox.hidden = false; chatFab.hidden = true;
+    if(!chatStarted){ chatStarted = true; addBot(greet()); }
+    if(window.matchMedia && window.matchMedia("(min-width:521px)").matches) chatIn.focus();
+  }
+  function closeChat(){ if(chatBox.hidden) return; chatBox.hidden = true; chatFab.hidden = false; chatFab.focus(); }
+  chatFab.addEventListener("click", openChat);
+  document.getElementById("chatclose").addEventListener("click", closeChat);
+  document.addEventListener("keydown", function(ev){ if(ev.key === "Escape") closeChat(); });
+  document.addEventListener("click", function(ev){ if(ev.target.closest("[data-openchat]")) openChat(); });
+  chatForm.addEventListener("submit", function(ev){
+    ev.preventDefault();
+    var text = chatIn.value.trim();
+    if(!text) return;
+    chatIn.value = "";
+    var u = addUser(text); addBot(answer(text)); scrollTo(u);
+  });
 
   /* ---------- navegação por seção ---------- */
   document.querySelectorAll('nav.sec a').forEach(function(a){
