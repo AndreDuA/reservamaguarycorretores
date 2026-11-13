@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Central do Corretor Reserva Maguary</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* Marca Reserva Maguary: faixa verde-escura com a logo, texto e interface em marrom-escuro, creme e dourado, tema único. Layout: uma coluna para celular, barra de seções fixa no topo, blocos escaneáveis; nada escondido atrás de clique. */
+:root{
+  --bg:#F9F6F0;
+  --surface:#FFFFFF;
+  --surface-2:#F2EDE6;
+  --ink:#3B2314;
+  --muted:#6E5D50;
+  --line:#DED7CA;
+  --brand:#5C2A0A;
+  --band:#03301F;
+  --brand-2:#2C5530;
+  --brand-ink:#F9F6F0;
+  --gold:#9B8048;
+  --gold-light:#D8C492;
+  --accent:#7A6230;
+  --accent-soft:#F3ECDA;
+  --ok:#1E6B40;
+  --ok-soft:#DFEEE2;
+  --crit:#A63A2B;
+  --crit-soft:#F7E1DC;
+  --font-display:"Poppins","Trebuchet MS",system-ui,sans-serif;
+  --font-body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --radius:12px;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font-body);font-size:16px;line-height:1.5;-webkit-text-size-adjust:100%}
+.wrap{max-width:860px;margin:0 auto;padding:0 16px}
+h1,h2,h3{font-family:var(--font-display);text-wrap:balance;margin:0;line-height:1.15}
+h1{font-size:clamp(1.8rem,6vw,2.5rem);font-weight:700;letter-spacing:-0.01em}
+h2{font-size:1.5rem;font-weight:700;letter-spacing:-0.01em}
+h3{font-size:1.05rem;font-weight:700}
+p{margin:0;overflow-wrap:anywhere}
+.num{font-variant-numeric:tabular-nums}
+.muted{color:var(--muted)}
+.small{font-size:.875rem}
+
+header.top{background:var(--band);color:var(--brand-ink);padding:26px 0 24px;border-bottom:4px solid var(--gold)}
+.logo{display:block;width:210px;height:auto;margin-bottom:20px}
+.top .eyebrow{color:var(--gold-light)}
+.intro{padding-top:4px}
+h2{color:var(--brand)}
+a.btn{display:inline-block;text-decoration:none}
+.eyebrow{font-size:.78rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--brand)}
+.top h1 span{display:block;color:var(--brand)}
+.top .meta{margin-top:10px;color:var(--brand-ink);opacity:.82;font-size:.9rem}
+.notice{margin-top:16px;display:flex;gap:10px;align-items:flex-start;background:var(--accent-soft);border-left:4px solid var(--gold);border-radius:8px;padding:12px 14px;font-size:.95rem}
+.notice strong{color:var(--accent)}
+
+.tiles{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:18px}
+@media (min-width:640px){.tiles{grid-template-columns:repeat(4,1fr)}}
+.tile{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:14px}
+.tile b{display:block;font-family:var(--font-display);font-size:1.4rem;line-height:1.1;font-variant-numeric:tabular-nums;color:var(--brand)}
+.tile span{display:block;margin-top:4px;font-size:.82rem;color:var(--muted)}
+
+nav.sec{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:1px solid var(--line)}
+nav.sec .wrap{display:flex;gap:6px;overflow-x:auto;padding-top:10px;padding-bottom:10px;scrollbar-width:none}
+nav.sec .wrap::-webkit-scrollbar{display:none}
+nav.sec a{flex:0 0 auto;text-decoration:none;color:var(--ink);font-weight:600;font-size:.9rem;padding:8px 12px;border-radius:999px;border:1px solid var(--line);background:var(--surface)}
+nav.sec a:hover{border-color:var(--brand);color:var(--brand)}
+a:focus-visible,button:focus-visible,input:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+
+section{padding:30px 0 6px;scroll-margin-top:60px}
+section > .lead{margin-top:6px;color:var(--muted);max-width:65ch}
+.stack{display:flex;flex-direction:column;gap:12px;margin-top:16px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:16px}
+.card h3{margin-bottom:6px}
+.card p{max-width:65ch}
+.row-between{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap}
+
+.btn{font:inherit;font-weight:600;font-size:.88rem;cursor:pointer;border-radius:8px;padding:8px 12px;border:1px solid var(--brand);background:var(--surface);color:var(--brand)}
+.btn:hover{background:var(--brand);color:var(--brand-ink)}
+.btn.solid{background:var(--brand);color:var(--brand-ink)}
+.btn.done{border-color:var(--ok);background:var(--ok-soft);color:var(--ok)}
+
+dl.ficha{margin:0;display:grid;grid-template-columns:1fr;gap:0}
+dl.ficha > div{display:grid;grid-template-columns:1fr;gap:2px;padding:10px 0;border-top:1px solid var(--line)}
+dl.ficha > div:first-child{border-top:0;padding-top:0}
+@media (min-width:640px){dl.ficha > div{grid-template-columns:200px 1fr;gap:16px}}
+dl.ficha dt{font-size:.82rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+dl.ficha dd{margin:0}
+
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px;padding:0;list-style:none}
+.chips li{background:var(--surface-2);border-radius:999px;padding:6px 12px;font-size:.9rem}
+
+.tablebox{overflow-x:auto;margin-top:16px;border:1px solid var(--line);border-radius:var(--radius);background:var(--surface)}
+table{border-collapse:collapse;width:100%;min-width:780px;font-size:.9rem}
+th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+thead th{font-size:.76rem;text-transform:uppercase;letter-spacing:.05em;color:var(--brand-ink);background:var(--brand)}
+tbody tr:last-child td{border-bottom:0}
+td.n{font-variant-numeric:tabular-nums;white-space:nowrap}
+td strong{font-family:var(--font-display)}
+
+.sim{margin-top:18px;background:var(--surface);border:2px solid var(--brand);border-radius:var(--radius);padding:16px}
+.sim .controls{display:flex;flex-wrap:wrap;gap:14px;align-items:flex-end;margin-top:12px}
+.field label{display:block;font-size:.82rem;font-weight:700;color:var(--muted);margin-bottom:4px}
+.field input[type="number"]{font:inherit;font-size:1.15rem;font-weight:700;font-variant-numeric:tabular-nums;width:140px;padding:9px 10px;border-radius:8px;border:1px solid var(--line);background:var(--bg);color:var(--ink)}
+.quick{display:flex;gap:6px;flex-wrap:wrap}
+.quick button{font:inherit;font-size:.85rem;font-weight:600;cursor:pointer;padding:8px 10px;border-radius:8px;border:1px solid var(--line);background:var(--bg);color:var(--ink)}
+.quick button:hover{border-color:var(--brand)}
+.check{display:flex;align-items:center;gap:8px;font-size:.9rem;font-weight:600}
+.check input{width:18px;height:18px;accent-color:var(--brand)}
+.lotinfo{margin-top:12px;font-family:var(--font-display);font-weight:600;font-size:1.05rem;color:var(--brand)}
+.verif{margin-top:8px;background:var(--accent-soft);border-left:4px solid var(--gold);border-radius:8px;padding:8px 12px;font-weight:600;font-size:.92rem}
+.sim-msg{margin-top:10px;font-size:.88rem;color:var(--crit);min-height:1.2em}
+.plans{display:grid;grid-template-columns:1fr;gap:12px;margin-top:8px}
+@media (min-width:700px){.plans{grid-template-columns:1fr 1fr}}
+.plan{border:1px solid var(--line);border-radius:10px;padding:14px;background:var(--bg);display:flex;flex-direction:column;gap:8px}
+.plan .head{display:flex;justify-content:space-between;gap:8px;align-items:baseline;flex-wrap:wrap}
+.plan .total{font-family:var(--font-display);font-size:1.35rem;font-weight:700;font-variant-numeric:tabular-nums}
+.pill{display:inline-block;font-size:.74rem;font-weight:700;border-radius:999px;padding:3px 9px;background:var(--ok-soft);color:var(--ok);white-space:nowrap}
+.pill.base{background:var(--surface-2);color:var(--muted)}
+.plan ul{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:4px;font-size:.92rem}
+.plan li{display:flex;justify-content:space-between;gap:12px;border-top:1px dashed var(--line);padding-top:4px}
+.plan li span:first-child{color:var(--muted)}
+.plan li span:last-child{text-align:right;font-variant-numeric:tabular-nums;font-weight:600}
+.plan li.com span:last-child{color:var(--accent)}
+.plan ul{margin-bottom:10px}
+.plan .btn{align-self:stretch;margin-top:auto;text-align:center}
+
+.search{margin-top:16px;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.search input{font:inherit;flex:1 1 240px;padding:11px 12px;border-radius:10px;border:1px solid var(--line);background:var(--surface);color:var(--ink)}
+.count{font-size:.85rem;color:var(--muted)}
+.tag{display:inline-block;font-size:.72rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--brand);margin-bottom:4px}
+.qa h3{font-family:var(--font-body);font-size:1rem}
+.empty{padding:16px;border:1px dashed var(--line);border-radius:var(--radius);color:var(--muted)}
+
+.obj .say{margin-top:8px;border-left:4px solid var(--brand);padding:2px 0 2px 12px}
+.obj .base{margin-top:10px;font-size:.88rem;color:var(--muted)}
+.obj .quote{font-family:var(--font-display);font-size:1.1rem;font-weight:700}
+
+ol.steps{list-style:none;counter-reset:s;margin:16px 0 0;padding:0;display:flex;flex-direction:column;gap:10px}
+ol.steps li{counter-increment:s;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:14px 14px 14px 56px;position:relative}
+ol.steps li::before{content:counter(s);position:absolute;left:14px;top:14px;width:30px;height:30px;border-radius:50%;background:var(--brand);color:var(--brand-ink);font-family:var(--font-display);font-weight:700;display:flex;align-items:center;justify-content:center}
+ol.steps b{display:block;margin-bottom:2px}
+.dont{margin-top:16px;background:var(--crit-soft);border-radius:var(--radius);padding:16px}
+.dont h3{color:var(--crit)}
+.dont ul{margin:8px 0 0;padding-left:18px;display:flex;flex-direction:column;gap:6px;max-width:65ch}
+
+.msg pre{white-space:pre-wrap;font-family:var(--font-body);font-size:.95rem;margin:8px 0 10px;padding:12px;border-radius:8px;background:var(--surface-2)}
+
+.files{display:flex;flex-direction:column;gap:8px;margin-top:16px}
+.files a{display:flex;justify-content:space-between;align-items:center;gap:12px;text-decoration:none;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:14px}
+.files a:hover{border-color:var(--brand)}
+.files a b{display:block}
+.files a small{display:block;color:var(--muted);font-size:.82rem;margin-top:2px}
+.files a .go{flex:0 0 auto;font-weight:700;font-size:.88rem;color:var(--brand);border:1px solid var(--brand);border-radius:8px;padding:7px 11px}
+.files a.all{background:var(--brand);border-color:var(--brand);color:var(--brand-ink)}
+.files a.all small{color:var(--brand-ink);opacity:.85}
+.files a.all .go{color:var(--brand-ink);border-color:var(--brand-ink)}
+.voice{border-left:4px solid var(--gold);background:var(--surface);border-radius:0 var(--radius) var(--radius) 0;padding:16px;border-top:1px solid var(--line);border-right:1px solid var(--line);border-bottom:1px solid var(--line)}
+.voice p{max-width:65ch;font-size:1.02rem}
+.voice p + p{margin-top:10px}
+.voice .who{margin-top:12px;font-size:.88rem;font-weight:700;color:var(--accent)}
+.sum{margin:8px 0 0;padding:0;list-style:none}
+.sum li{display:flex;justify-content:space-between;gap:12px;padding:8px 0;border-top:1px solid var(--line)}
+.sum li:first-child{border-top:0}
+.sum li span:last-child{font-variant-numeric:tabular-nums;font-weight:700;text-align:right}
+.sum li.tot span{font-family:var(--font-display);font-size:1.05rem}
+.com-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px}
+.com-grid .tile b{color:var(--accent)}
+
+.quiz .q{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:16px}
+.quiz .opts{display:grid;gap:8px;margin-top:10px}
+.quiz .opts button{font:inherit;text-align:left;cursor:pointer;padding:10px 12px;border-radius:8px;border:1px solid var(--line);background:var(--bg);color:var(--ink)}
+.quiz .opts button:hover:not(:disabled){border-color:var(--brand)}
+.quiz .opts button.right{border-color:var(--ok);background:var(--ok-soft);color:var(--ok);font-weight:700}
+.quiz .opts button.wrong{border-color:var(--crit);background:var(--crit-soft);color:var(--crit)}
+.quiz .opts button:disabled{cursor:default}
+.quiz .why{margin-top:8px;font-size:.9rem;color:var(--muted);min-height:1.2em}
+.score{position:sticky;bottom:10px;margin-top:14px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;background:var(--surface);border:2px solid var(--brand);border-radius:var(--radius);padding:12px 14px}
+.score b{font-family:var(--font-display);font-size:1.15rem}
+
+footer{margin-top:36px;padding:20px 0 40px;border-top:1px solid var(--line);color:var(--muted);font-size:.85rem}
+footer p{max-width:70ch}
+footer p + p{margin-top:8px}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <img class="logo" src="data:image/png;base64,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" alt="Reserva Maguary" width="210" height="113">
+    <p class="eyebrow">Material interno para corretores parceiros</p>
+    <h1>Central do Corretor</h1>
+    <p class="meta">Atualizada em 12/11/2026. Valores da tabela vigente desde 02/10/2026.</p>
+  </div>
+</header>
+
+<div class="wrap intro">
+    <div class="notice">
+      <p><strong>Muda em janeiro/2027:</strong> o lote de referência passa a R$ 165.998 e a 1ª mensal passa a vencer 30 dias após a assinatura.</p>
+    </div>
+    <div class="tiles">
+      <div class="tile"><b>199</b><span>lotes no condomínio</span></div>
+      <div class="tile"><b>160 m²</b><span>lote padrão, 8 × 20 m</span></div>
+      <div class="tile"><b>R$ 599</b><span>mensal fixa no plano 168 com semestrais ou anuais</span></div>
+      <div class="tile"><b>R$ 163.813,79</b><span>lote de 160 m² no plano de 168 meses</span></div>
+    </div>
+</div>
+
+<nav class="sec" aria-label="Seções">
+  <div class="wrap">
+    <a href="#resumo">Resumo</a>
+    <a href="#localizacao">Localização</a>
+    <a href="#visao">Visão do arquiteto</a>
+    <a href="#planos">Planos e simulador</a>
+    <a href="#materiais">Materiais</a>
+    <a href="#videos">Vídeos e redes</a>
+    <a href="#duvidas">Dúvidas</a>
+    <a href="#objecoes">Objeções</a>
+    <a href="#roteiro">Roteiro</a>
+    <a href="#mensagens">Mensagens</a>
+    <a href="#comissao">Comissão</a>
+    <a href="#teste">Teste</a>
+  </div>
+</nav>
+
+<main class="wrap">
+
+<section id="resumo">
+  <h2>O produto em 30 segundos</h2>
+  <div class="stack">
+    <div class="card">
+      <p id="pitch">O Reserva Maguary é um condomínio fechado de 199 lotes em Curuçambá, Ananindeua, da DUÁ Empreendimentos. O lote padrão tem 160 m² (8 × 20), e o condomínio terá portaria, piscinas adulto e infantil, quadras, playground e um bosque preservado. O pagamento é direto com a incorporadora, sem análise de crédito, sem consulta ao Serasa e sem burocracia, com entrada de 5% dividida em 5 vezes e mensais a partir de R$ 599.</p>
+      <p style="margin-top:10px"><button class="btn" data-copy="#pitch">Copiar texto</button></p>
+    </div>
+
+    <div class="card">
+      <h3>Ficha do empreendimento</h3>
+      <dl class="ficha">
+        <div><dt>Endereço</dt><dd>Rua Baraúnas, 245, Curuçambá, Ananindeua-PA</dd></div>
+        <div><dt>Incorporadora</dt><dd>DUÁ Empreendimentos e Construções Ltda., CNPJ 37.310.226/0001-07</dd></div>
+        <div><dt>Registro</dt><dd>Matrícula nº 101.841, Registro de Imóveis de Ananindeua. Incorporação registrada e alvará emitido.</dd></div>
+        <div><dt>Unidades</dt><dd>199 lotes, numerados de 01 a 199</dd></div>
+        <div><dt>Tamanho dos lotes</dt><dd>Padrão de 160 m² (8 × 20 m). Lotes especiais de 128,76 m² a 216,95 m².</dd></div>
+        <div><dt>Uso</dt><dd>Exclusivamente residencial</dd></div>
+        <div><dt>Ruas</dt><dd>5 ruas internas (Maguary, Harpia, Uirapuru, Ararajuba e Anambé), com 5,5 m a 6 m de largura, calçadas de 1 m nos dois lados e piso em bloco intertravado</dd></div>
+        <div><dt>Infraestrutura</dt><dd>Terraplenagem, drenagem pluvial, rede de esgoto com estação de tratamento, caixa d'água elevada, iluminação das vias e das áreas comuns</dd></div>
+        <div><dt>Como o lote é entregue</dt><dd>Com ponto de água para medidor individual e ligação de esgoto. Medidor de água e ligação de energia ficam por conta do proprietário.</dd></div>
+        <div><dt>Entrega</dt><dd>Prevista até outubro de 2029</dd></div>
+        <div><dt>Site</dt><dd><a href="https://reservamaguary.com.br" style="color:var(--brand)">reservamaguary.com.br</a></dd></div>
+      </dl>
+    </div>
+
+    <div class="card">
+      <h3>Regras para construir no lote</h3>
+      <ul class="sum">
+        <li><span>Recuo frontal</span><span>2 m</span></li>
+        <li><span>Recuos laterais</span><span>0,60 m</span></li>
+        <li><span>Recuo de fundo</span><span>3 m</span></li>
+        <li><span>Altura máxima</span><span>2 pavimentos</span></li>
+        <li><span>Início da construção</span><span>após a entrega do condomínio</span></li>
+      </ul>
+      <p class="small muted" style="margin-top:10px">No lote padrão de 8 × 20 m, com recuo nas duas laterais, sobra uma área de 6,8 × 15 m para a casa: 102 m² por pavimento, até 204 m² em dois pavimentos.</p>
+    </div>
+
+    <div class="card">
+      <h3>Lazer e áreas comuns</h3>
+      <ul class="chips">
+        <li>Portaria 24h</li>
+        <li>Piscina adulto (1,20 m)</li>
+        <li>Piscina infantil (0,60 m)</li>
+        <li>3 bangalôs com churrasqueira</li>
+        <li>Quadra poliesportiva</li>
+        <li>Quadra de beach tennis</li>
+        <li>Playground</li>
+        <li>Pergolado</li>
+        <li>Bosque Maguary</li>
+        <li>Academia ao ar livre</li>
+        <li>Lounge e casa na árvore</li>
+        <li>Banheiros acessíveis</li>
+      </ul>
+      <p class="small muted" style="margin-top:10px">As áreas comuns serão entregues mobiliadas. As imagens do book são ilustrativas.</p>
+    </div>
+
+    <div class="card">
+      <h3>Preço por m²</h3>
+      <p>Entre os menores preços por m² de condomínio fechado em Ananindeua: R$ 1.023,84 por m² no plano de 168 meses e R$ 628,12 por m² no plano Investidor.</p>
+      <p style="margin-top:8px">Referência de mercado: anúncios de lotes de 160 m² em outros condomínios fechados da cidade pedem R$ 270.000 (R$ 1.687 por m²) e R$ 305.600 (R$ 1.910 por m²). Consulta em 12/11/2026.</p>
+    </div>
+
+    <div class="card">
+      <h3>Obra e vendas hoje</h3>
+      <p>Ruas internas abertas. Terraplenagem e drenagem profunda iniciadas. Registro de incorporação e alvará emitidos.</p>
+      <p style="margin-top:10px"><a class="btn" href="https://www.instagram.com/reel/Dfai2FLOW5V/">Ver o vídeo da obra</a></p>
+      <p style="margin-top:10px">Mais de 40 lotes vendidos. Os lotes nascentes e os mais próximos do clube são os que acabam primeiro.</p>
+    </div>
+  </div>
+</section>
+
+<section id="localizacao">
+  <h2>Localização</h2>
+  <div class="stack">
+    <div class="card">
+      <h3>Rua Baraúnas, 245, Curuçambá, Ananindeua-PA</h3>
+      <p style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap">
+        <a class="btn solid" href="https://www.google.com/maps/search/?api=1&amp;query=Rua+Bara%C3%BAnas+245+Curu%C3%A7amb%C3%A1+Ananindeua+PA">Abrir no Google Maps</a>
+        <a class="btn" href="https://www.google.com/maps/dir/?api=1&amp;destination=Rua+Bara%C3%BAnas+245+Curu%C3%A7amb%C3%A1+Ananindeua+PA">Traçar rota</a>
+      </p>
+      <p class="small muted" style="margin-top:14px">Texto para enviar ao cliente:</p>
+      <p id="loc-msg" style="margin-top:4px">O Reserva Maguary fica na Rua Baraúnas, 245, Curuçambá, Ananindeua-PA. Veja no mapa: https://www.google.com/maps/search/?api=1&amp;query=Rua+Bara%C3%BAnas+245+Curu%C3%A7amb%C3%A1+Ananindeua+PA</p>
+      <p style="margin-top:10px"><button class="btn" data-copy="#loc-msg">Copiar localização</button></p>
+    </div>
+    <div class="card">
+      <h3>O que fica perto</h3>
+      <ul class="chips">
+        <li>Bairro asfaltado</li>
+        <li>Hospital Santa Maria</li>
+        <li>Escolas e farmácias</li>
+        <li>Supermercados Mix Mateus e Líder</li>
+        <li>Acesso rápido à Avenida Independência</li>
+        <li>Nova Orla de Ananindeua</li>
+        <li>Parque Vila Maguary</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="visao">
+  <h2>Visão do arquiteto</h2>
+  <p class="lead">Duas ideias que o André, arquiteto do projeto, usa no estande. Copie e use com o cliente.</p>
+  <div class="stack">
+    <div class="voice">
+      <h3>1. A conta da casa própria</h3>
+      <div id="visao-1" style="margin-top:8px">
+        <p>Eu sempre digo no estande que o Reserva Maguary é um produto fácil de vender. Faça a conta em valor de hoje: o lote à vista sai por cerca de R$ 100 mil, e com mais uns R$ 150 mil você constrói uma casa de 80 a 100 m², com 3 quartos.</p>
+        <p>Mesmo parcelando o lote, estamos falando de algo em torno de R$ 300 mil por uma casa em condomínio fechado. O que você compra hoje com R$ 300 mil? Casas em condomínios vizinhos, como o Bétel, estão anunciadas bem acima disso.</p>
+        <p>O bairro está em crescimento, recebeu investimento público na Orla e no Parque Maguari, e os empreendimentos lançados em volta foram vendidos. O preço por m² está entre os menores da região, e não tem aprovação de cadastro: é direto com a construtora.</p>
+        <p>Para mim, é o melhor produto para quem quer realizar o sonho da casa própria.</p>
+      </div>
+      <p class="who">André Almeida, arquiteto autor do projeto e incorporador</p>
+      <p style="margin-top:10px"><button class="btn" data-copy="#visao-1">Copiar argumento</button></p>
+    </div>
+
+    <div class="card">
+      <h3>Os números por trás da conta</h3>
+      <ul class="sum">
+        <li><span>Lote de 160 m², plano Investidor</span><span>R$ 100.499,76</span></li>
+        <li><span>Casa de 80 a 100 m², 3 quartos (estimativa do André)</span><span>cerca de R$ 150.000</span></li>
+        <li class="tot"><span>Casa própria com o lote à vista</span><span>cerca de R$ 250 mil</span></li>
+        <li class="tot"><span>Com o lote parcelado, conforme o plano</span><span>R$ 297 mil a R$ 314 mil</span></li>
+        <li><span>Referência: casa de 3 quartos anunciada no Condomínio Bétel</span><span>R$ 580.000</span></li>
+        <li><span>Referência: casa de 3 quartos em condomínio no Maguari</span><span>R$ 500.000</span></li>
+      </ul>
+      <p class="small muted" style="margin-top:10px">O custo de construção é estimativa e varia com o projeto e o acabamento. Os anúncios, consultados em 12/11/2026, são referência de mercado e não garantia de valorização. A construção só começa depois da entrega do condomínio.</p>
+    </div>
+
+    <div class="voice">
+      <h3>2. Natureza e tempo em família</h3>
+      <div id="visao-2" style="margin-top:8px">
+        <p>Tem um conceito que eu gosto de trazer. Hoje a família passa muito tempo dentro de casa, e o cliente poderia comprar um apartamento. A diferença de estar em um condomínio fechado, em contato com a natureza, é o seu filho poder brincar do lado de fora.</p>
+        <p>Tirar as crianças um pouco da tela e trazê-las para esse contato com a natureza é fundamental no mundo em que a gente vive. Isso traz muita qualidade de vida.</p>
+        <p>Além do clube completo, o condomínio terá cerca de 10 mil m² de área verde. É nela que fica o Bosque Maguary, o nosso diferencial, com itens de lazer diferentes dos outros condomínios.</p>
+      </div>
+      <p class="who">André Almeida, arquiteto autor do projeto e incorporador</p>
+      <p style="margin-top:10px"><button class="btn" data-copy="#visao-2">Copiar argumento</button></p>
+    </div>
+
+    <div class="card">
+      <h3>O que tem no Bosque Maguary</h3>
+      <ul class="sum">
+        <li><span>Academia ao ar livre</span><span>exercício no meio do verde</span></li>
+        <li><span>Lounge Maguary</span><span>salão de festas ao ar livre</span></li>
+        <li><span>Casa na árvore</span><span>playground infantil na natureza</span></li>
+      </ul>
+      <p class="small muted" style="margin-top:10px">O bosque preserva a vegetação nativa do terreno. Para quem compara com apartamento, este é o argumento: espaço para a criança brincar fora de casa, dentro de um condomínio fechado.</p>
+    </div>
+  </div>
+</section>
+
+<section id="planos">
+  <h2>Planos de pagamento</h2>
+  <p class="lead">Valores do lote padrão de 160 m². Para lotes especiais, use o simulador abaixo.</p>
+  <ul class="chips">
+    <li>Sem análise de crédito</li>
+    <li>Sem consulta ao Serasa</li>
+    <li>Sem burocracia</li>
+    <li>Direto com a incorporadora</li>
+  </ul>
+  <div class="tablebox">
+    <table>
+      <thead>
+        <tr><th>Plano</th><th>Total</th><th>Sinal (total)</th><th>Sinal em 5×</th><th>Mensais</th><th>Semestrais ou anuais</th><th>Correção</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>168 com semestrais ou anuais</strong></td><td class="n">R$ 163.813,79</td><td class="n">R$ 8.190,69</td><td class="n">5 × R$ 1.638,14</td><td class="n">168 × R$ 599,00</td><td class="n">28 × R$ 1.963,97<br>ou 14 × R$ 3.927,94</td><td>INCC na obra. IPCA + 1% ao mês após a entrega.</td></tr>
+        <tr><td><strong>168 só mensais</strong></td><td class="n">R$ 163.813,79</td><td class="n">R$ 8.190,69</td><td class="n">5 × R$ 1.638,14</td><td class="n">168 × R$ 926,33</td><td class="n">Não tem</td><td>INCC na obra. IPCA + 1% ao mês após a entrega.</td></tr>
+        <tr><td><strong>120 com semestrais ou anuais</strong></td><td class="n">R$ 147.432,41</td><td class="n">R$ 11.794,59</td><td class="n">5 × R$ 2.358,92</td><td class="n">120 × R$ 699,00</td><td class="n">20 × R$ 2.587,89<br>ou 10 × R$ 5.175,78</td><td>INCC na obra. IPCA + 1% ao mês após a entrega.</td></tr>
+        <tr><td><strong>120 só mensais</strong></td><td class="n">R$ 147.432,41</td><td class="n">R$ 11.794,59</td><td class="n">5 × R$ 2.358,92</td><td class="n">120 × R$ 1.130,32</td><td class="n">Não tem</td><td>INCC na obra. IPCA + 1% ao mês após a entrega.</td></tr>
+        <tr><td><strong>36 meses</strong></td><td class="n">R$ 139.241,72</td><td class="n">R$ 20.886,26</td><td class="n">5 × R$ 4.177,25</td><td class="n">36 × R$ 3.287,65</td><td class="n">Não tem</td><td>INCC</td></tr>
+        <tr><td><strong>Investidor</strong></td><td class="n">R$ 100.499,76</td><td class="n">R$ 50.249,88</td><td class="n">5 × R$ 10.049,98</td><td class="n">12 × R$ 4.187,49</td><td class="n">Não tem</td><td>Sem correção</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="sim" id="simulador">
+    <h3>Simulador pelo número do lote</h3>
+    <p class="small muted">Digite o número do lote e veja todos os planos. Sem número, a simulação é do lote padrão de 160 m².</p>
+    <div class="controls">
+      <div class="field">
+        <label for="lote">Número do lote (1 a 199)</label>
+        <input type="number" id="lote" inputmode="numeric" min="1" max="199" step="1" placeholder="ex.: 31">
+      </div>
+      <label class="check" for="showcom"><input type="checkbox" id="showcom"> Mostrar minha comissão</label>
+    </div>
+    <p class="lotinfo" id="lotinfo" role="status"></p>
+    <p class="verif">Mediante a verificação da secretaria de vendas.</p>
+    <p class="sim-msg" id="simmsg" role="status"></p>
+    <div class="plans" id="plans"></div>
+    <p class="small muted" style="margin-top:12px">Valores e disponibilidade do lote mediante a verificação da secretaria de vendas. Pode haver diferença de centavos em relação à tabela oficial.</p>
+  </div>
+</section>
+
+<section id="materiais">
+  <h2>Material de vendas</h2>
+  <p class="lead">Toque para baixar. Os arquivos ficam no Google Drive e abrem sem precisar de login.</p>
+  <div class="files">
+    <a class="all" href="https://drive.google.com/drive/folders/1uPtH_EAmkYH-EUuYhrii_bLC4IR0XbdW"><span><b>Pasta completa</b><small>Todos os arquivos de uma vez</small></span><span class="go">Abrir</span></a>
+    <a href="https://drive.google.com/uc?export=download&amp;id=1PRcmf6n056CyEck1Jg7I190bU1xBAFVQ"><span><b>Book comercial</b><small>PDF, 23,7 MB</small></span><span class="go">Baixar</span></a>
+    <a href="https://drive.google.com/uc?export=download&amp;id=1gYqXRCSCeVzBJifaHqEmURj5oz6VgR86"><span><b>Memorial descritivo</b><small>PDF</small></span><span class="go">Baixar</span></a>
+    <a href="https://drive.google.com/uc?export=download&amp;id=11yHCjAqb2tfNE1Zqfem6FWDZEBkZYACs"><span><b>Ficha de proposta</b><small>PDF para preencher com o cliente</small></span><span class="go">Baixar</span></a>
+  </div>
+</section>
+
+<section id="videos">
+  <h2>Vídeos e redes sociais</h2>
+  <p class="lead">Quem posta mais, vende mais. Grave, publique e marque sempre @reservamaguary.</p>
+  <div class="stack">
+    <div class="voice">
+      <h3>Temos uma videomaker à sua disposição</h3>
+      <p style="margin-top:8px">Os corretores parceiros podem gravar seus vídeos com a nossa videomaker, no próprio empreendimento. Você aparece, ela cuida da gravação e da edição. Combine a data com a coordenação comercial.</p>
+    </div>
+
+    <div class="card">
+      <h3>Vídeos prontos para enviar e repostar</h3>
+      <p style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap">
+        <a class="btn solid" href="https://www.instagram.com/reel/DZQIS9DOVa1/">Vídeo institucional</a>
+        <a class="btn solid" href="https://www.instagram.com/reel/Dfai2FLOW5V/">Vídeo da obra</a>
+        <a class="btn" href="https://www.instagram.com/reservamaguary/">Perfil @reservamaguary</a>
+      </p>
+      <p class="small muted" style="margin-top:10px">No perfil você encontra mais vídeos para repostar nos seus stories e enviar aos clientes.</p>
+    </div>
+
+    <div class="card">
+      <h3>Seis ideias de vídeo para gravar</h3>
+      <ul class="sum">
+        <li><span>A obra hoje</span><span>ruas abertas e terraplenagem</span></li>
+        <li><span>A conta da casa própria</span><span>lote mais construção</span></li>
+        <li><span>Sem análise de crédito</span><span>como funciona a compra</span></li>
+        <li><span>Bosque Maguary</span><span>crianças fora da tela</span></li>
+        <li><span>Localização</span><span>o que fica perto</span></li>
+        <li><span>Dúvida da semana</span><span>responda uma pergunta de cliente</span></li>
+      </ul>
+      <p class="small muted" style="margin-top:10px">Os argumentos estão nas seções Visão do arquiteto, Localização e Dúvidas.</p>
+    </div>
+
+    <div class="card">
+      <h3>Antes de publicar</h3>
+      <ul class="chips">
+        <li>Marque @reservamaguary</li>
+        <li>Use os valores da tabela vigente</li>
+        <li>Não prometa valorização</li>
+        <li>Termine chamando para a visita</li>
+      </ul>
+      <p class="small muted" style="margin-top:14px">Legenda pronta:</p>
+      <p id="legenda" style="margin-top:4px">Condomínio fechado de lotes em Ananindeua, com mensais a partir de R$ 599, direto com a incorporadora e sem análise de crédito. Agende sua visita comigo. @reservamaguary</p>
+      <p style="margin-top:10px"><button class="btn" data-copy="#legenda">Copiar legenda</button></p>
+    </div>
+  </div>
+</section>
+
+<section id="duvidas">
+  <h2>Dúvidas frequentes</h2>
+  <p class="lead">Respostas baseadas no contrato, no memorial descritivo e na tabela de vendas.</p>
+  <div class="search">
+    <input type="search" id="q" placeholder="Buscar em dúvidas e objeções: escritura, correção, entrada..." aria-label="Buscar em dúvidas e objeções">
+    <span class="count" id="qcount" role="status"></span>
+  </div>
+  <div class="stack" id="faq"></div>
+</section>
+
+<section id="objecoes">
+  <h2>Objeções e como responder</h2>
+  <p class="lead">A frase do cliente, o que dizer e o dado que sustenta a resposta.</p>
+  <div class="stack" id="obj"></div>
+</section>
+
+<section id="roteiro">
+  <h2>Roteiro de atendimento</h2>
+  <ol class="steps">
+    <li><b>Qualifique</b>É para morar ou para investir? Em quanto tempo pretende construir? Quanto cabe de entrada e por mês?</li>
+    <li><b>Apresente pelo perfil</b>Para quem vai morar: segurança, lazer e o bosque dentro do condomínio. Para quem investe: o plano Investidor e o ritmo de vendas do empreendimento.</li>
+    <li><b>Simule na frente do cliente</b>Use o simulador com a área do lote escolhido. Mostre total, entrada, mensais e também as semestrais ou anuais.</li>
+    <li><b>Confirme o lote e agende a visita</b>Antes de oferecer um lote, confirme a disponibilidade com a Helaine, na coordenação comercial. Depois marque a visita ao terreno.</li>
+    <li><b>Preencha a ficha de proposta</b>Lote, área e dados do comprador: nome completo, CPF, RG, estado civil, profissão, endereço, telefone e e-mail. Se houver cônjuge ou segundo comprador, os mesmos dados.</li>
+    <li><b>Contrato</b>O cliente assina o compromisso de compra e venda e recebe o quadro resumo, os memoriais, a planta do condomínio e a planta do lote.</li>
+  </ol>
+  <div class="dont">
+    <h3>O que você não pode prometer</h3>
+    <ul>
+      <li>Valorização garantida ou percentual de retorno.</li>
+      <li>Data de entrega diferente da que está no contrato.</li>
+      <li>Construção no lote antes da entrega do condomínio.</li>
+      <li>Parcela de R$ 599 sem explicar as semestrais ou anuais e a correção.</li>
+      <li>Desconto, prazo ou condição que não esteja na tabela vigente.</li>
+      <li>Móveis iguais aos das imagens: as áreas serão mobiliadas, mas as imagens do book são ilustrativas.</li>
+      <li>Valor de condomínio ou de IPTU: ainda não estão definidos.</li>
+      <li>Metragem exata: o contrato admite variação de até 5% na área final do lote.</li>
+      <li>Um lote específico antes de confirmar a disponibilidade.</li>
+    </ul>
+  </div>
+</section>
+
+<section id="mensagens">
+  <h2>Mensagens prontas</h2>
+  <p class="lead">Copie, troque o que está entre colchetes e envie pelo WhatsApp.</p>
+  <div class="stack" id="msgs"></div>
+</section>
+
+<section id="comissao">
+  <h2>Comissão</h2>
+  <div class="com-grid">
+    <div class="tile"><b>PJ 5%</b><span>pessoa jurídica, planos de 168 e 120 meses</span></div>
+    <div class="tile"><b>PJ 8%</b><span>pessoa jurídica, planos de 36 meses e Investidor</span></div>
+    <div class="tile"><b>PF 3%</b><span>pessoa física, planos de 168 e 120 meses</span></div>
+    <div class="tile"><b>PF 5%</b><span>pessoa física, planos de 36 meses e Investidor</span></div>
+  </div>
+  <div class="stack">
+    <div class="card">
+      <p>A comissão sai do sinal pago pelo cliente. O percentual depende de como você atua: pessoa jurídica (PJ) ou pessoa física (PF).</p>
+      <p style="margin-top:8px">Pelo contrato, a comissão não é devolvida se o cliente desistir da compra depois do prazo legal de arrependimento.</p>
+      <p style="margin-top:8px" class="small muted">No simulador, marque "Mostrar minha comissão" para ver o valor estimado em cada plano, como PJ e como PF. Desmarque antes de mostrar a tela ao cliente.</p>
+    </div>
+  </div>
+</section>
+
+<section id="teste" class="quiz" style="padding-bottom:40px">
+  <h2>Teste: você está pronto para atender?</h2>
+  <p class="lead">11 perguntas sobre o que o cliente mais pergunta. A resposta certa aparece na hora.</p>
+  <div class="stack" id="quiz"></div>
+  <div class="score">
+    <b id="scoretxt">0 de 11 respondidas</b>
+    <button class="btn" id="resetquiz" type="button">Refazer o teste</button>
+  </div>
+</section>
+
+</main>
+
+
+<script>
+(function(){
+  "use strict";
+
+  /* ---------- utilidades ---------- */
+  var brl = function(v){ return v.toLocaleString("pt-BR",{style:"currency",currency:"BRL"}); };
+  var r2 = function(v){ return Math.round(v*100)/100; };
+  var areaFmt = function(a){ return a.toLocaleString("pt-BR",{maximumFractionDigits:2}); };
+  var el = function(tag, cls, text){ var e=document.createElement(tag); if(cls) e.className=cls; if(text!=null) e.textContent=text; return e; };
+  var norm = function(s){ return s.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,""); };
+
+  function copyText(text, btn){
+    var done = function(){ var old=btn.textContent; btn.textContent="Copiado"; btn.classList.add("done"); setTimeout(function(){ btn.textContent=old; btn.classList.remove("done"); },1600); };
+    var fail = function(){ var old=btn.textContent; btn.textContent="Selecione o texto e copie"; setTimeout(function(){ btn.textContent=old; },2400); };
+    try{
+      if(navigator.clipboard && navigator.clipboard.writeText){ navigator.clipboard.writeText(text).then(done, fail); }
+      else { fail(); }
+    }catch(e){ fail(); }
+  }
+  document.addEventListener("click", function(ev){
+    var b = ev.target.closest("[data-copy]");
+    if(!b) return;
+    var src = document.querySelector(b.getAttribute("data-copy"));
+    if(src) copyText(src.textContent.trim(), b);
+  });
+
+  /* ---------- simulador ---------- */
+  var M2_168 = 163813.79/160;      // preço por m² na tabela de 168 meses
+  var M2_INV = 100499.76/160;       // preço por m² no plano Investidor
+  var CORR_LONGA = "INCC na obra; IPCA + 1% ao mês após a entrega";
+
+  function calc(a){
+    var p = r2(a*M2_168);
+    var t120 = r2(p*0.90), t36 = r2(p*0.85), tinv = r2(a*M2_INV);
+    var e168 = r2(p*0.05), e120 = r2(t120*0.08), e36 = r2(t36*0.15), einv = r2(tinv*0.50);
+    var s168 = (p-e168-168*599)/28;
+    var s120 = (t120-e120-120*699)/20;
+    return [
+      {id:"168s", nome:"168 meses com semestrais", total:p, desc:null, entrada:e168, entradaTxt:"5 × "+brl(r2(e168/5)),
+       mensal:"168 × "+brl(599), extra:"28 semestrais de "+brl(r2(s168))+" ou 14 anuais de "+brl(r2(s168*2)), corr:CORR_LONGA, com:[0.05,0.03]},
+      {id:"168m", nome:"168 meses só mensais", total:p, desc:null, entrada:e168, entradaTxt:"5 × "+brl(r2(e168/5)),
+       mensal:"168 × "+brl(r2((p-e168)/168)), extra:null, corr:CORR_LONGA, com:[0.05,0.03]},
+      {id:"120s", nome:"120 meses com semestrais", total:t120, desc:"10% abaixo do 168", entrada:e120, entradaTxt:"5 × "+brl(r2(e120/5)),
+       mensal:"120 × "+brl(699), extra:"20 semestrais de "+brl(r2(s120))+" ou 10 anuais de "+brl(r2(s120*2)), corr:CORR_LONGA, com:[0.05,0.03]},
+      {id:"120m", nome:"120 meses só mensais", total:t120, desc:"10% abaixo do 168", entrada:e120, entradaTxt:"5 × "+brl(r2(e120/5)),
+       mensal:"120 × "+brl(r2((t120-e120)/120)), extra:null, corr:CORR_LONGA, com:[0.05,0.03]},
+      {id:"36", nome:"36 meses", total:t36, desc:"15% abaixo do 168", entrada:e36, entradaTxt:"5 × "+brl(r2(e36/5)),
+       mensal:"36 × "+brl(r2((t36-e36)/36)), extra:null, corr:"INCC", com:[0.08,0.05]},
+      {id:"inv", nome:"Investidor", total:tinv, desc:"38,6% abaixo do 168", entrada:einv, entradaTxt:"5 × "+brl(r2(einv/5)),
+       mensal:"12 × "+brl(r2((tinv-einv)/12)), extra:null, corr:"Sem correção", com:[0.08,0.05]}
+    ];
+  }
+  window.__calc = calc; // exposto para conferência
+
+  // lotes com metragem especial: número -> [quadra, área]. Os demais lotes têm 160 m².
+  var ESPECIAIS = {31:["B",167.09],58:["B",163.26],83:["B",213.54],105:["C",157.26],106:["C",140.15],107:["C",169.95],
+    136:["D",157.47],139:["D",129.38],140:["C",139.89],141:["D",160.77],142:["D",150.88],144:["D",154.94],
+    165:["F",183.99],166:["F",204.67],186:["E",192.26],187:["E",216.95]};
+  var loteIn = document.getElementById("lote"), lotInfo = document.getElementById("lotinfo"), showCom = document.getElementById("showcom"),
+      plansBox = document.getElementById("plans"), simMsg = document.getElementById("simmsg");
+
+  function renderPlans(){
+    var raw = String(loteIn.value).trim(), n = parseInt(raw, 10), a = 160, rotulo = "lote padrão de 160 m²";
+    simMsg.textContent = "";
+    if(raw === ""){ lotInfo.textContent = "Lote padrão de 160 m² (8 × 20 m)"; }
+    else if(!isFinite(n) || n < 1 || n > 199 || String(n) !== raw){
+      simMsg.textContent = "O Reserva Maguary tem lotes de 1 a 199. Confira o número.";
+      lotInfo.textContent = "Lote padrão de 160 m² (8 × 20 m)";
+    } else if(ESPECIAIS[n]){
+      a = ESPECIAIS[n][1];
+      lotInfo.textContent = "Lote " + n + ", quadra " + ESPECIAIS[n][0] + ": " + areaFmt(a) + " m² (metragem especial)";
+      rotulo = "lote " + n + ", quadra " + ESPECIAIS[n][0] + ", " + areaFmt(a) + " m²";
+    } else {
+      lotInfo.textContent = "Lote " + n + ": 160 m² (8 × 20 m, lote padrão)";
+      rotulo = "lote " + n + ", 160 m²";
+    }
+    plansBox.textContent = "";
+    calc(a).forEach(function(pl){
+      var card = el("div","plan");
+      var head = el("div","head");
+      head.appendChild(el("h3",null,pl.nome));
+      head.appendChild(el("span", pl.desc ? "pill" : "pill base", pl.desc || "preço de tabela"));
+      card.appendChild(head);
+      card.appendChild(el("div","total",brl(pl.total)));
+      var ul = el("ul");
+      var rows = [["Sinal (total)", brl(pl.entrada)], ["Sinal em 5×", pl.entradaTxt], ["Mensais", pl.mensal]];
+      if(pl.extra) rows.push(["Reforços", pl.extra]);
+      rows.push(["Correção", pl.corr]);
+      rows.forEach(function(r){ var li=el("li"); li.appendChild(el("span",null,r[0])); li.appendChild(el("span",null,r[1])); ul.appendChild(li); });
+      if(showCom.checked){
+        [["PJ",pl.com[0]],["PF",pl.com[1]]].forEach(function(c){
+          var li = el("li","com"); li.appendChild(el("span",null,"Comissão "+c[0]+" ("+Math.round(c[1]*100)+"%)")); li.appendChild(el("span",null,brl(r2(pl.total*c[1])))); ul.appendChild(li);
+        });
+      }
+      card.appendChild(ul);
+      var btn = el("button","btn","Copiar resumo para o cliente"); btn.type="button";
+      btn.addEventListener("click", function(){
+        var t = "Reserva Maguary, "+rotulo+"\nPlano "+pl.nome+"\nTotal: "+brl(pl.total)+"\nSinal: "+brl(pl.entrada)+" (em "+pl.entradaTxt+")"+"\nMensais: "+pl.mensal+"\n"+(pl.extra ? "Reforços: "+pl.extra+"\n" : "")+"Correção: "+pl.corr+"\nSimulação mediante a verificação da secretaria de vendas.";
+        copyText(t, btn);
+      });
+      card.appendChild(btn);
+      plansBox.appendChild(card);
+    });
+  }
+  loteIn.addEventListener("input", renderPlans);
+  showCom.addEventListener("change", renderPlans);
+  renderPlans();
+
+  /* ---------- dúvidas ---------- */
+  var FAQ = [
+    ["Produto","O que é o Reserva Maguary?","Um condomínio fechado de 199 lotes residenciais em Curuçambá, Ananindeua, incorporado e construído pela DUÁ Empreendimentos."],
+    ["Produto","Onde fica?","Na Rua Baraúnas, 245, Curuçambá, Ananindeua-PA. O link do mapa está na seção Localização."],
+    ["Produto","Qual o tamanho dos lotes?","O lote padrão tem 160 m² (8 × 20 m). Há lotes especiais de 128,76 m² a 216,95 m², com preço proporcional à área."],
+    ["Produto","O que vem no lote?","Ponto de água para medidor individual e ligação de esgoto. O medidor de água e a ligação de energia são pedidos e pagos pelo proprietário."],
+    ["Produto","Qual a infraestrutura do condomínio?","Ruas em bloco intertravado com calçadas, drenagem pluvial, rede de esgoto com estação de tratamento, caixa d'água elevada, iluminação das vias e portaria."],
+    ["Produto","O que tem na área de lazer?","Piscina adulto e infantil, 3 bangalôs com churrasqueira, quadra poliesportiva, quadra de beach tennis, playground, pergolado e o Bosque Maguary, com academia ao ar livre, lounge e casa na árvore. As áreas comuns serão entregues mobiliadas."],
+    ["Produto","Posso usar o lote para comércio?","Não. O condomínio é exclusivamente residencial."],
+    ["Pagamento","Quais são os planos?","168 e 120 meses (com semestrais ou anuais, ou só com mensais), 36 meses e o plano Investidor, com 50% de entrada e 12 mensais. Os valores estão na seção Planos."],
+    ["Pagamento","Como funciona a entrada?","Nos planos de 168, 120 e 36 meses a entrada é de 5%, 8% e 15% do total e pode ser dividida em 5 vezes. No plano Investidor a entrada é de 50% e também pode ser dividida em 5 vezes."],
+    ["Pagamento","As parcelas têm correção?","Sim. Durante a obra, correção mensal pelo INCC. Depois da entrega, IPCA mais juros de 1% ao mês. Contratos com prazo menor que 36 meses, como o Investidor em 12 vezes, não têm correção."],
+    ["Pagamento","Tem análise de crédito ou consulta ao Serasa?","Não. Não fazemos análise de crédito nem consulta ao Serasa, e não há burocracia de banco. O parcelamento é direto com a DUÁ."],
+    ["Pagamento","Precisa de financiamento em banco?","Não. O parcelamento da tabela é direto com a incorporadora, pago por boleto."],
+    ["Pagamento","O que acontece se atrasar uma parcela?","O quadro resumo do contrato prevê multa de 2% sobre o valor devido, correção pelo INCC e juros de mora de 1% ao mês, proporcionais aos dias de atraso."],
+    ["Pagamento","Posso adiantar parcelas?","Pode. O contrato não prevê desconto pela antecipação, e a correção incide até a data do pagamento."],
+    ["Pagamento","Qual o valor do condomínio e do IPTU?","Ainda não estão definidos. Taxas de condomínio e IPTU são de responsabilidade do comprador quando passarem a ser cobrados. Não informe valor estimado."],
+    ["Obra e prazos","Qual o prazo de entrega?","A entrega está prevista até outubro de 2029. A área de lazer segue o mesmo prazo."],
+    ["Obra e prazos","Em que fase está a obra?","Ruas internas abertas, terraplenagem e drenagem profunda iniciadas. Há um vídeo da obra na seção Resumo para enviar ao cliente."],
+    ["Obra e prazos","Quando posso construir?","Somente depois da entrega do condomínio. Antes da entrega não é permitido construir no lote."],
+    ["Obra e prazos","Quais são as regras para construir no lote?","Recuo frontal de 2 m, recuos laterais de 0,60 m e recuo de fundo de 3 m, com até 2 pavimentos. No lote padrão de 8 × 20 m isso permite cerca de 102 m² por pavimento. A construção começa depois da entrega do condomínio."],
+    ["Obra e prazos","O cliente pode visitar o terreno?","Pode, com visita agendada e acompanhada. Combine com a coordenação comercial."],
+    ["Documentação","O empreendimento está registrado?","Sim. A incorporação está registrada na matrícula nº 101.841 do Registro de Imóveis de Ananindeua, e o alvará de obras foi emitido."],
+    ["Documentação","Quando sai a escritura?","Em até 180 dias depois da quitação de todas as parcelas, e somente após a conclusão das obras. Custas de cartório e impostos da escritura e do registro são do comprador."],
+    ["Documentação","Tem patrimônio de afetação?","Não. O empreendimento tem incorporação registrada em cartório, mas não está sob regime de patrimônio de afetação. Responda com clareza se o cliente perguntar."],
+    ["Documentação","E se o cliente desistir da compra?","A devolução segue as regras do contrato: há retenção de parte do valor pago e a comissão de corretagem não é devolvida. A restituição é feita em até 12 parcelas. Mostre a cláusula ao cliente antes da assinatura."],
+    ["Documentação","O cliente pode vender ou transferir o lote antes de quitar?","Pode, com aprovação prévia da DUÁ e taxa de 5% do valor do contrato."],
+    ["Documentação","Quais documentos o cliente precisa?","Para a ficha de proposta: nome completo, CPF, RG, estado civil, profissão, endereço, telefone e e-mail. Se for casado ou houver segundo comprador, os mesmos dados dele."]
+  ];
+  var OBJ = [
+    ["Está caro.","Vamos olhar pelo que cabe no mês. No plano de 168 meses a mensal é fixa em R$ 599, com entrada de 5% dividida em 5 vezes. Se você tiver mais fôlego, o plano de 120 meses sai 10% mais barato e o de 36 meses, 15%.","Totais do lote de 160 m²: R$ 163.813,79 em 168 meses, R$ 147.432,41 em 120 e R$ 139.241,72 em 36. O m² sai a R$ 1.023,84 no plano de 168 meses; anúncios de lotes em outros condomínios fechados de Ananindeua pedem de R$ 1.687 a R$ 1.910 por m² (consulta em 12/11/2026)."],
+    ["Não quero morar em Curuçambá.","Tudo bem, muita gente compra aqui sem intenção de morar. Para quem compra como investimento existe um plano próprio: 50% de entrada e o restante em 12 vezes sem correção, por R$ 100.499,76 no lote de 160 m².","Localização é condição do cliente, não objeção a vencer. Não insista em moradia: mude para a linha de investimento. Não prometa valorização."],
+    ["Tenho medo de a obra não sair.","O empreendimento tem incorporação registrada em cartório e alvará emitido. As ruas internas já estão abertas, e a terraplenagem começou. A entrega está prevista até outubro de 2029. Que tal conhecer o terreno e ver de perto?","Matrícula nº 101.841, Registro de Imóveis de Ananindeua. Entrega prevista até outubro de 2029."],
+    ["A parcela vai aumentar com a correção.","Vai ser corrigida, sim, e prefiro que você saiba disso agora: INCC durante a obra e, depois da entrega, IPCA mais 1% ao mês. Quem quer evitar a correção longa escolhe um plano mais curto. No Investidor, em 12 vezes, não há correção.","Regra de correção do quadro resumo do contrato. Explicar a correção na venda evita distrato depois."],
+    ["A semestral pesa.","Dá para tirar as semestrais. No plano de 168 meses só com mensais, a parcela fica em R$ 926,33 no lote de 160 m². Outra saída é trocar as 28 semestrais por 14 anuais.","Plano 168 só mensais: 168 × R$ 926,33. Anual de R$ 3.927,94 no lugar de duas semestrais de R$ 1.963,97."],
+    ["Não tenho o valor da entrada.","A entrada do plano de 168 meses é de 5% e pode ser dividida em 5 vezes. No lote de 160 m² são 5 parcelas de R$ 1.638,14.","Sinal de R$ 8.190,69 no lote de 160 m²."],
+    ["Meu nome está negativado.","Isso não impede a compra. Não fazemos análise de crédito nem consulta ao Serasa. O parcelamento é direto com a incorporadora, sem banco e sem burocracia.","Venda direta com a DUÁ, sem análise de crédito e sem consulta ao Serasa."],
+    ["Vou pensar. Preciso falar em casa.","Claro. Para vocês decidirem juntos, o melhor é verem o lote. Consigo agendar a visita para os dois? Só adianto que a tabela muda em janeiro de 2027: o lote de referência passa a R$ 165.998.","Mudança de tabela já definida para janeiro/2027. Use o fato, sem pressionar."],
+    ["Prefiro comprar uma casa pronta.","Faz sentido para quem precisa se mudar já. O lote é para quem quer começar com uma parcela menor e construir do próprio jeito. A construção começa depois da entrega do condomínio, então você tem esse período para se planejar.","A construção no lote só é permitida após a entrega do condomínio."],
+    ["E se eu não conseguir continuar pagando?","O contrato permite transferir o lote para outra pessoa, com aprovação da DUÁ e taxa de 5% do valor do contrato. Se houver desistência, valem as regras de devolução do contrato, que eu mostro a você antes de assinar.","Cláusulas de cessão de direitos e de rescisão do compromisso de compra e venda."]
+  ];
+  var MSGS = [
+    ["Primeiro contato","Olá, [nome]! Aqui é [seu nome], corretor parceiro do Reserva Maguary, condomínio fechado de lotes em Curuçambá, Ananindeua. São lotes a partir de 128 m², com mensais a partir de R$ 599, direto com a incorporadora, sem análise de crédito e sem consulta ao Serasa. Você procura um lote para morar ou para investir?"],
+    ["Depois da simulação","[nome], segue o resumo do que simulamos para o lote de [área] m² no plano [plano]: total de R$ [total], entrada de R$ [entrada] e mensais de R$ [mensal]. Os valores seguem a tabela vigente e são corrigidos conforme o contrato. Posso reservar um horário para você conhecer o lote?"],
+    ["Convite para a visita","[nome], as ruas internas do Reserva Maguary já estão abertas e a terraplenagem começou. Ver o terreno ajuda muito a escolher o lote. Qual dia e horário ficam melhores para você?"],
+    ["Retomar um cliente parado","[nome], tudo bem? Passando para avisar que a tabela do Reserva Maguary muda em janeiro de 2027. Se ainda fizer sentido para você, refaço a simulação com as condições atuais."]
+  ];
+
+  var faqBox = document.getElementById("faq"), objBox = document.getElementById("obj"), msgBox = document.getElementById("msgs");
+  FAQ.forEach(function(f){
+    var c = el("article","card qa"); c.appendChild(el("span","tag",f[0])); c.appendChild(el("h3",null,f[1])); c.appendChild(el("p",null,f[2]));
+    c.setAttribute("data-text", norm(f.join(" "))); faqBox.appendChild(c);
+  });
+  OBJ.forEach(function(o, i){
+    var c = el("article","card obj"); var id = "obj-say-"+i;
+    c.appendChild(el("p","quote","“"+o[0]+"”"));
+    var say = el("p","say",o[1]); say.id = id; c.appendChild(say);
+    c.appendChild(el("p","base","Base: "+o[2]));
+    var b = el("button","btn","Copiar resposta"); b.type="button"; b.setAttribute("data-copy","#"+id); b.style.marginTop="10px"; c.appendChild(b);
+    c.setAttribute("data-text", norm(o.join(" "))); objBox.appendChild(c);
+  });
+  MSGS.forEach(function(m, i){
+    var c = el("article","card msg"); var id = "msg-"+i;
+    c.appendChild(el("h3",null,m[0]));
+    var pre = el("pre",null,m[1]); pre.id = id; c.appendChild(pre);
+    var b = el("button","btn","Copiar mensagem"); b.type="button"; b.setAttribute("data-copy","#"+id); c.appendChild(b);
+    msgBox.appendChild(c);
+  });
+
+  var q = document.getElementById("q"), qcount = document.getElementById("qcount");
+  var emptyF = el("p","empty","Nenhuma dúvida com esse termo. Tente outra palavra ou fale com a coordenação comercial."),
+      emptyO = el("p","empty","Nenhuma objeção com esse termo.");
+  emptyF.hidden = true; emptyO.hidden = true; faqBox.appendChild(emptyF); objBox.appendChild(emptyO);
+  function filter(){
+    var t = norm(q.value.trim()), nf = 0, no = 0;
+    faqBox.querySelectorAll("article").forEach(function(c){ var ok = !t || c.getAttribute("data-text").indexOf(t) > -1; c.hidden = !ok; if(ok) nf++; });
+    objBox.querySelectorAll("article").forEach(function(c){ var ok = !t || c.getAttribute("data-text").indexOf(t) > -1; c.hidden = !ok; if(ok) no++; });
+    emptyF.hidden = nf > 0; emptyO.hidden = no > 0;
+    qcount.textContent = t ? (nf + " dúvidas e " + no + " objeções encontradas") : (FAQ.length + " dúvidas e " + OBJ.length + " objeções");
+  }
+  q.addEventListener("input", filter); filter();
+
+  /* ---------- teste ---------- */
+  var QUIZ = [
+    ["O cliente pergunta se precisa passar por análise de crédito. O que responder?",["Sim, com consulta ao Serasa","Não, não há análise de crédito nem consulta ao Serasa","Só para os planos longos","Depende do banco"],1,"Não fazemos análise de crédito nem consulta ao Serasa. A compra é direta com a incorporadora, sem burocracia."],
+    ["Quantos lotes tem o Reserva Maguary?",["120","160","199","250"],2,"São 199 lotes, numerados de 01 a 199."],
+    ["Qual é o lote padrão?",["6 × 20 m, 120 m²","8 × 20 m, 160 m²","10 × 20 m, 200 m²","8 × 25 m, 200 m²"],1,"O padrão é 8 × 20 m, com 160 m². Os especiais vão de 128,76 a 216,95 m²."],
+    ["Como é a entrada no plano de 168 meses?",["5% em 5 vezes","10% à vista","15% em 3 vezes","Não tem entrada"],0,"5% do total, divididos em 5 vezes."],
+    ["Qual a mensal fixa do plano de 168 meses com semestrais?",["R$ 499","R$ 599","R$ 699","R$ 926,33"],1,"R$ 599, a menor mensal da tabela. R$ 699 é a mensal fixa do plano de 120 meses."],
+    ["Como as parcelas são corrigidas depois da entrega?",["Não são corrigidas","Só pelo INCC","IPCA + 1% ao ano","IPCA + 1% ao mês"],3,"INCC durante a obra. Depois da entrega, IPCA mais 1% ao mês."],
+    ["Como funciona o plano Investidor?",["50% de entrada e 12 mensais sem correção","15% de entrada e 36 mensais","5% de entrada e 168 mensais","100% à vista"],0,"50% de entrada, que pode ser dividida em 5 vezes, e o restante em 12 mensais sem correção."],
+    ["O que o lote recebe na entrega?",["Medidor de água e padrão de energia instalados","Ponto de água para medidor e ligação de esgoto","Só a demarcação","Muro e calçada"],1,"Ponto de água para medidor individual e ligação de esgoto. Medidor e ligação de energia ficam com o proprietário."],
+    ["O cliente diz que não moraria em Curuçambá. O que fazer?",["Insistir nas vantagens de morar lá","Encerrar o atendimento","Oferecer desconto fora da tabela","Conduzir para a linha de investimento"],3,"Localização é condição do cliente. Mude para a linha de investimento e apresente os planos, sem prometer valorização."],
+    ["Quando o comprador pode construir no lote?",["A qualquer momento","Assim que pagar a entrada","Só depois da entrega do condomínio","Com 35% do lote pago"],2,"Só depois da entrega do condomínio. Antes disso não é permitido construir."],
+    ["As áreas de lazer são entregues com móveis?",["Sim, serão entregues mobiliadas","Só a área da piscina","Não, são entregues sem mobiliário","Depende do plano"],0,"Serão entregues mobiliadas. As imagens do book são ilustrativas, então não prometa móveis iguais aos das fotos."]
+  ];
+  var quizBox = document.getElementById("quiz"), scoreTxt = document.getElementById("scoretxt"), answered = 0, right = 0;
+  function renderQuiz(){
+    quizBox.textContent = ""; answered = 0; right = 0; updateScore();
+    QUIZ.forEach(function(item, qi){
+      var box = el("div","q"); box.appendChild(el("h3",null,(qi+1)+". "+item[0]));
+      var opts = el("div","opts"), why = el("p","why"); why.setAttribute("role","status");
+      item[1].forEach(function(text, oi){
+        var b = el("button",null,text); b.type = "button";
+        b.addEventListener("click", function(){
+          opts.querySelectorAll("button").forEach(function(x, xi){ x.disabled = true; if(xi === item[2]) x.classList.add("right"); });
+          answered++;
+          if(oi === item[2]){ right++; why.textContent = "Certo. " + item[3]; }
+          else { b.classList.add("wrong"); why.textContent = "Não é essa. " + item[3]; }
+          updateScore();
+        });
+        opts.appendChild(b);
+      });
+      box.appendChild(opts); box.appendChild(why); quizBox.appendChild(box);
+    });
+  }
+  function updateScore(){
+    if(answered < QUIZ.length){ scoreTxt.textContent = answered + " de " + QUIZ.length + " respondidas, " + right + " certas"; }
+    else { scoreTxt.textContent = right + " de " + QUIZ.length + " certas. " + (right >= 10 ? "Pronto para atender." : "Revise as seções e refaça o teste."); }
+  }
+  document.getElementById("resetquiz").addEventListener("click", renderQuiz);
+  renderQuiz();
+
+  /* ---------- navegação por seção ---------- */
+  document.querySelectorAll('nav.sec a').forEach(function(a){
+    a.addEventListener("click", function(ev){
+      var id = a.getAttribute("href").slice(1), target = document.getElementById(id);
+      if(!target) return;
+      ev.preventDefault(); target.scrollIntoView();
+      try{ location.hash = id; }catch(e){}
+    });
+  });
+  function goHash(){ var id = (location.hash||"").slice(1); if(id){ var t = document.getElementById(id); if(t) t.scrollIntoView(); } }
+  window.addEventListener("hashchange", goHash); goHash();
+})();
+</script>
+</body>
+</html>
